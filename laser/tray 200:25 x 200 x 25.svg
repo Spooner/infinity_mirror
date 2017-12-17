@@ -39,8 +39,8 @@
      id="namedview95"
      showgrid="false"
      inkscape:zoom="0.74757531"
-     inkscape:cx="844.57895"
-     inkscape:cy="427.9215"
+     inkscape:cx="952.34462"
+     inkscape:cy="611.32321"
      inkscape:window-x="65"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -239,23 +239,10 @@
   <rect
      style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35433072;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      id="rect4281"
-     width="11.231124"
+     width="9.0955667"
      height="14.156879"
-     x="426.68835"
+     x="426.5661"
      y="9965.9209" />
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35433072;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect4283"
-     width="1.7932048"
-     height="0.94379193"
-     x="432.72861"
-     y="9973.2822" />
-  <circle
-     style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35433072;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="path4264-6"
-     cx="219.52893"
-     cy="9914.0068"
-     r="3" />
   <rect
      style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      id="rect4262-7-3"
@@ -270,4 +257,40 @@
      height="19.000002"
      x="211.82886"
      y="9850.0557" />
+  <g
+     id="g4293"
+     transform="translate(0,-41.768863)">
+    <rect
+       y="9776.1963"
+       x="213.39294"
+       height="30.900278"
+       width="205.90028"
+       id="rect4262-3"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.0997217;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4289"
+       y="9796.2188"
+       x="284.82773"
+       style="font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.16666603px;line-height:125%;font-family:'URW Chancery L';-inkscape-font-specification:'URW Chancery L Medium Italic';letter-spacing:0px;word-spacing:0px;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="9796.2188"
+         x="284.82773"
+         id="tspan4291"
+         sodipodi:role="line">Infinity</tspan></text>
+  </g>
+  <rect
+     style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect4262-5"
+     width="200"
+     height="28"
+     x="212.32527"
+     y="9790.3086" />
+  <rect
+     style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.09990667;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect4315"
+     width="6.9405613"
+     height="19.220015"
+     x="214.53186"
+     y="9902.6055" />
 </svg>
