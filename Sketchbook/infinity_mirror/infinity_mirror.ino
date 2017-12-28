@@ -5,16 +5,16 @@
 #define MODE_OFF 0
 #define MODE_ALL_ON 1
 #define MODE_CLAP 2
-#define MODE_ROTATE_FAST 3
+#define MODE_RAIN 3
 #define MODE_RAINBOW 4
-#define MODE_XMAS 5
+#define MODE_ROTATING_RAINBOW 5
 #define NUM_MODES 6
 
 #define FAST_REPEAT 8
 
 const int BUTTON_PIN = 2;
 const int LED_DATA_PIN = 6;
-const int BRIGHTNESS = 16;
+const int BRIGHTNESS = 20;
 
 int last_button_state = LOW;
 int button_state;
@@ -24,24 +24,24 @@ unsigned long last_debounce_time = 0;
 unsigned long debounce_delay = 50;
 
 const CRGB LIGHTER = CRGB(150, 200, 255);
-const CRGB MEDIUM = CRGB(112, 150, 200);
-const CRGB DARKER = CRGB(75, 100, 127);
-const CRGB DARKEST = CRGB(40, 50, 65);
 
 CRGB leds[NUM_LEDS];
 
-void setup() { 
+void setup() {
   FastLED.addLeds<WS2812B, LED_DATA_PIN>(leds, NUM_LEDS);
   FastLED.setBrightness(BRIGHTNESS);
   pinMode(BUTTON_PIN, INPUT);
+  randomSeed(analogRead(0));
   Serial.begin(9600);
   Serial.println("Starting...");
 }
 
 void loop() {
   check_button();
-  draw();
-  delay(5);
+  if (mode != MODE_OFF) {
+    draw();
+  }
+  delay(20);
 }
 
 void check_button() {
@@ -64,6 +64,7 @@ void check_button() {
         mode = (mode + 1) % NUM_MODES;
         Serial.print("Switch mode: ");
         Serial.println(mode);
+        FastLED.clear();
       }
     }
   }
@@ -72,69 +73,63 @@ void check_button() {
 
 void draw() {
   int offset;
-  FastLED.clear();
-  
+
   switch (mode) {
-    case MODE_OFF:
-      Serial.println("Mode: Off");
-      break;
-      
     case MODE_ALL_ON:
-      Serial.println("Mode: All On");
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i] = LIGHTER;
       }
       break;
-      
+
     case MODE_CLAP:
-      Serial.println("Mode: Clap");
+      FastLED.clear();
       rotate_offset += 0.1;
       offset = int(rotate_offset) % 12;
       if (offset >= 6) {
         offset = 11 - offset;
       }
       leds[offset] = leds[11 - offset] = leds[12 + offset] = leds[23 - offset] = LIGHTER;
-      break;     
-      
-    case MODE_ROTATE_FAST:
-      Serial.println("Mode: Rotate fast");
-      rotate_offset += 0.2;
-      for (int i = int(rotate_offset) % FAST_REPEAT; i < NUM_LEDS; i += FAST_REPEAT) {
-        leds[i] = LIGHTER;
+      break;
+
+    case MODE_RAIN:
+      rotate_offset += 1;
+      // fade
+      for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i].subtractFromRGB(1);
       }
-      for (int i = int(rotate_offset - 1) % FAST_REPEAT; i < NUM_LEDS; i += FAST_REPEAT) {
-        leds[i] = MEDIUM;
-      }
-      for (int i = int(rotate_offset - 2) % FAST_REPEAT; i < NUM_LEDS; i += FAST_REPEAT) {
-        leds[i] = DARKER;
-      }
-      for (int i = int(rotate_offset - 3) % FAST_REPEAT; i < NUM_LEDS; i += FAST_REPEAT) {
-        leds[i] = DARKEST;
+      // create new every so often
+      if (rotate_offset > 10) {
+        rotate_offset -= 10;
+        leds[random(NUM_LEDS)].setHSV(random(256), 255, 255);
       }
       break;
-      
+
     case MODE_RAINBOW:
-      Serial.println("Mode: Rainbow");
       rotate_offset += 0.5;
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i].setHSV(int(rotate_offset) % 256, 200, 255);
       }
       break;
-      
-    case MODE_XMAS:
-      Serial.println("Mode: XMas");
-      rotate_offset += 0.01;
-      if (int(rotate_offset) % 2 == 0) {
-        for (int i = 0; i < NUM_LEDS; i += 2) {
-          leds[i] = CRGB::Red;
-        }
-      } else {
-        for (int i = 1; i < NUM_LEDS; i += 2) {
-          leds[i] = CRGB::Green;
-        }
+
+    case MODE_ROTATING_RAINBOW:
+      FastLED.clear();
+      rotate_offset += 0.2;
+      for (int i = int(rotate_offset) % FAST_REPEAT; i < NUM_LEDS; i += FAST_REPEAT) {
+        leds[i].setHSV(int(rotate_offset) % 256, 200, 255);
+      }
+      for (int i = int(rotate_offset - 1) % FAST_REPEAT; i < NUM_LEDS; i += FAST_REPEAT) {
+        leds[i].setHSV(int(rotate_offset) % 256, 200, 200);
+      }
+      for (int i = int(rotate_offset - 2) % FAST_REPEAT; i < NUM_LEDS; i += FAST_REPEAT) {
+        leds[i].setHSV(int(rotate_offset) % 256, 200, 150);
+      }
+      for (int i = int(rotate_offset - 3) % FAST_REPEAT; i < NUM_LEDS; i += FAST_REPEAT) {
+        leds[i].setHSV(int(rotate_offset) % 256, 200, 100);
+      }
+      for (int i = int(rotate_offset - 4) % FAST_REPEAT; i < NUM_LEDS; i += FAST_REPEAT) {
+        leds[i].setHSV(int(rotate_offset) % 256, 200, 50);
       }
       break;
-  }   
-  
+  }
   FastLED.show();
 }
